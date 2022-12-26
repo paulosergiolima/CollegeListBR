@@ -26,42 +26,55 @@ try:
     os.remove('novo_conceito_enade.xlsx')
 except:
     print('First time')
-
+try:
+    os.remove('novo_coneito_enade.xlsx')
+except:
+    print("first time")
 enade_wb = load_workbook(filename='conceito_enade.xlsx')
 idd_wb = load_workbook(filename='conceito_idd.xlsx')
-enade_ws = enade_wb.active
-enade_array = []
 
-new_enade = Workbook()
-new_enade_ws = new_enade.active
-#new_enade_ws
-header_array = []
-new_enade_ws.row_dimensions[1] = enade_ws.row_dimensions[1]
-for i in alc:
-    header_array.append(enade_ws[f'{i}1'].value)
-    new_enade_ws.column_dimensions[i] = enade_ws.column_dimensions[i]
-    print('test',i)
+def create(type='enade'):
+    workbook = enade_wb
+    filename = 'novo_conceito_enade.xlsx'
+    if type == 'idd':
+        filename = 'novo_conceito_idd.xlsx'
+        workbook =  idd_wb
+    enade_ws = workbook.active
+    enade_array = []
 
-new_enade_ws.append(header_array)
-
-for i in alc:
-    new_enade_ws[f'{i}1'].font = copy(enade_ws[f'{i}1'].font)
-    new_enade_ws[f'{i}1'].style = copy(enade_ws[f'{i}1'].style)
-    new_enade_ws[f'{i}1'].border = copy(enade_ws[f'{i}1'].border)
-    new_enade_ws[f'{i}1'].alignment = copy(enade_ws[f'{i}1'].alignment)
-#print(enade_ws.rows)
-for data in enade_ws['C']:
-    #print(data.value)
-    if data.value != None and data.value.strip() == "CIÊNCIA DA COMPUTAÇÃO":
-        #print(data.row)
-        enade_array.append(data.row)
-
-
-for data in enade_array:
-    cool_array = []
+    new_enade = Workbook()
+    new_enade_ws = new_enade.active
+    #new_enade_ws
+    header_array = []
+    new_enade_ws.row_dimensions[1] = enade_ws.row_dimensions[1]
     for i in alc:
-        #print(enade_ws[f'{i}{data}'].value)
-        cool_array.append(enade_ws[f'{i}{data}'].value)
-    #print(cool_array)
-    new_enade_ws.append(cool_array)
-new_enade.save(filename='novo_conceito_enade.xlsx')
+        header_array.append(enade_ws[f'{i}1'].value)
+        new_enade_ws.column_dimensions[i] = enade_ws.column_dimensions[i]
+        print('test',i)
+
+    new_enade_ws.append(header_array)
+
+    for i in alc:
+        new_enade_ws[f'{i}1'].font = copy(enade_ws[f'{i}1'].font)
+        new_enade_ws[f'{i}1'].style = copy(enade_ws[f'{i}1'].style)
+        new_enade_ws[f'{i}1'].border = copy(enade_ws[f'{i}1'].border)
+        new_enade_ws[f'{i}1'].alignment = copy(enade_ws[f'{i}1'].alignment)
+    #print(enade_ws.rows)
+    for data in enade_ws['C']:
+        #print(data.value)
+        if data.value != None and data.value.strip() == "CIÊNCIA DA COMPUTAÇÃO":
+            #print(data.row)
+            enade_array.append(data.row)
+
+
+    for data in enade_array:
+        cool_array = []
+        for i in alc:
+            #print(enade_ws[f'{i}{data}'].value)
+            cool_array.append(enade_ws[f'{i}{data}'].value)
+        #print(cool_array)
+        new_enade_ws.append(cool_array)
+    new_enade.save(filename=filename)
+
+create()
+create('idd')

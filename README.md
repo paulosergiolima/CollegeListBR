@@ -3,9 +3,9 @@
 Cria uma duas planilhas baseada nos indices do ENADE e do IDD, uma métrica para cursos de Instituições de Ensino Superior Brasileiras.
 
 ## Como usar
-A implementação do docker compose ainda não foi terminada, por enquanto rode esses comandos:
-pip3 install -r requirements.txt
-python main.py
+A implementação do docker compose ainda não foi terminada, por enquanto rode esses comandos:<br>
+pip3 install -r requirements.txt<br>
+python main.py<br>
 Modifique o array chamado courses com o(s) curso(s) que você que aparecem na planilha criada, formatados com strings, e escolha o ano em que o esses cursos participaram
 
 ## Anos

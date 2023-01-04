@@ -4,7 +4,7 @@ from copy import copy
 from string import ascii_uppercase as alc
 from openpyxl import load_workbook, Workbook, styles
 from flask import request, Flask, send_file
-def create(type='enade',year='2021'):
+def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS', 'SISTEMAS DE INFORMAÇÃO', 'MEDICINA VETERINÁRIA']):
     #year = input("What year you want to check? \n")
     path_enade = f'/home/paulolima/get_best_colleges/conceito_enade{year}.xlsx'
     path_idd = f'/home/paulolima/get_best_colleges/conceito_idd{year}.xlsx'
@@ -17,7 +17,6 @@ def create(type='enade',year='2021'):
     elif year == '2019':
         url_link_enade = f'{url_link}/Conceito_Enade_2019.xlsx'
         url_link_idd = f'{url_link}/IDD_2019.xlsx'
-    courses = ['CIÊNCIA DA COMPUTAÇÃO', 'TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS', 'SISTEMAS DE INFORMAÇÃO', 'MEDICINA VETERINÁRIA']
     if not os.path.exists(path_enade):
         conceito_enade = requests.get(url_link_enade, verify=False)
         open(f"conceito_enade{year}.xlsx", "wb").write(conceito_enade.content)
@@ -82,9 +81,12 @@ def create(type='enade',year='2021'):
 
 app = Flask(__name__)
 
-@app.route('/<path:year>/<path:type>', methods=['POST', 'GET'])
-def login(year, type):
-    file = create(type=type, year=year)
-    print(file)
+@app.route('/<path:year>/<path:type>/<path:raw_courses>', methods=['POST', 'GET'])
+def login(year, type, raw_courses):
+    raw_courses = raw_courses.replace('_', ' ')
+    courses = raw_courses.split(';')
+    print(courses)
+    print(raw_courses)
+    file = create(type=type, year=year, courses=courses)
     uploads = os.path.join(app.root_path, file)
     return send_file(file)

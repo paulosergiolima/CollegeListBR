@@ -2,7 +2,7 @@ import os
 from openpyxl import load_workbook, Workbook
 import requests
 from string import ascii_uppercase as alc
-import copy
+from copy import copy
 def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS', 'SISTEMAS DE INFORMAÇÃO', 'MEDICINA VETERINÁRIA']):
     #year = input("What year you want to check? \n")
     path_enade = f'/home/paulolima/get_best_colleges/conceito_enade{year}.xlsx'

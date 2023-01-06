@@ -22,16 +22,7 @@ def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNO
     if not os.path.exists(path_idd):
         conceito_idd = requests.get(url_link_idd, verify=False)
         open(f"conceito_idd{year}.xlsx", "wb").write(conceito_idd.content)
-
-    try:
-        os.remove('novo_conceito_enade.xlsx')
-    except:
-        print('File already on the system')
-
-    try:
-        os.remove('novo_conceito_idd.xlsx')
-    except:
-        print("File already on the system")
+    
     enade_wb = load_workbook(filename=f'conceito_enade{year}.xlsx')
     enade_ws2 = enade_wb.active
     dead_style = copy(enade_ws2['A1'].style)
@@ -47,7 +38,7 @@ def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNO
 
     new_enade = Workbook()
     new_enade_ws = new_enade.active
-    #new_enade_ws
+    
     header_array = []
     new_enade_ws.row_dimensions[1] = enade_ws.row_dimensions[1]
     for i in alc:

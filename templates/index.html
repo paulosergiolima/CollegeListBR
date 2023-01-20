@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="{{url_for('static', filename='script.js')}}"></script> 
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
+
 <body>
-        <label for="fname">Ano:</label>
-        <input type="text" id="year" name="fname"><br><br>
-        <label for="lname">Cursos:</label>
-        <input type="text" id="courses" name="lname"><br><br>
-        <input type="button" value="Submit" onclick="myfunction()">
+    <label for="fname">Ano:</label>
+    <input type="text" id="year" name="fname" oninput="getCourses()"><br><br>
+    <div hidden id="courses_2021" >
+        {% for course in cursos2021: %}
+        <input type="checkbox" id="{{ course }}" name="check"> {{ course }} <br>
+        {% endfor %}
+    </div>
+    <div hidden id="courses_2019" >
+        {% for course in cursos2019: %}
+        <input type="checkbox" id="{{ course }}" name="check"> {{ course }} <br>
+        {% endfor %}
+    </div>
+    <div hidden id="courses_2018" >
+        {% for course in cursos2018: %}
+        <input type="checkbox" id="{{ course }}" name="check"> {{ course }} <br>
+        {% endfor %}
+    </div>
+    <input type="button" value="Submit" onclick="myfunction()">
 </body>
+
 </html>

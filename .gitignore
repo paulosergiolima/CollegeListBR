@@ -2,3 +2,4 @@
 .~lock
 .venv
 dockerfile
+_*

@@ -10,9 +10,9 @@ def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNO
     idd_wb = load_workbook(filename=f'/home/kinipk/CollegeListBr/conceito_idd{year}.xlsx')
 
     workbook = enade_wb
-    filename = 'novo_conceito_enade.xlsx'
+    filename = '/home/kinipk/CollegeListBr/novo_conceito_enade.xlsx'
     if type == 'idd':
-        filename = 'novo_conceito_idd.xlsx'
+        filename = '/home/kinipk/CollegeListBr/novo_conceito_idd.xlsx'
         workbook =  idd_wb
     enade_ws = workbook.active
     enade_array = []

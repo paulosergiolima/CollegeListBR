@@ -4,10 +4,10 @@ import requests
 from string import ascii_uppercase as alc
 from copy import copy
 def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS', 'SISTEMAS DE INFORMAÇÃO', 'MEDICINA VETERINÁRIA']):
-    enade_wb = load_workbook(filename=f'conceito_enade{year}.xlsx')
+    enade_wb = load_workbook(filename=f'/home/kinipk/CollegeListBr/conceito_enade{year}.xlsx')
     enade_ws2 = enade_wb.active
     dead_style = copy(enade_ws2['A1'].style)
-    idd_wb = load_workbook(filename=f'conceito_idd{year}.xlsx')
+    idd_wb = load_workbook(filename=f'/home/kinipk/CollegeListBr/conceito_idd{year}.xlsx')
 
     workbook = enade_wb
     filename = 'novo_conceito_enade.xlsx'

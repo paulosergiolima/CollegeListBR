@@ -3,16 +3,18 @@ from openpyxl import load_workbook, Workbook
 import requests
 from string import ascii_uppercase as alc
 from copy import copy
+from pathlib import Path
 def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS', 'SISTEMAS DE INFORMAÇÃO', 'MEDICINA VETERINÁRIA']):
-    enade_wb = load_workbook(filename=f'/home/kinipk/CollegeListBr/conceito_enade{year}.xlsx')
+    my_folder = Path(__file__).parent.resolve()
+    enade_wb = load_workbook(filename=my_folder / f'conceito_enade{year}.xlsx')
     enade_ws2 = enade_wb.active
     dead_style = copy(enade_ws2['A1'].style)
-    idd_wb = load_workbook(filename=f'/home/kinipk/CollegeListBr/conceito_idd{year}.xlsx')
+    idd_wb = load_workbook(filename=my_folder / f'conceito_idd{year}.xlsx')
 
     workbook = enade_wb
-    filename = '/home/kinipk/CollegeListBr/novo_conceito_enade.xlsx'
+    filename = my_folder / 'novo_conceito_enade.xlsx'
     if type == 'idd':
-        filename = '/home/kinipk/CollegeListBr/novo_conceito_idd.xlsx'
+        filename =my_folder / 'novo_conceito_idd.xlsx'
         workbook =  idd_wb
     enade_ws = workbook.active
     enade_array = []

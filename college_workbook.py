@@ -3,35 +3,18 @@ from openpyxl import load_workbook, Workbook
 import requests
 from string import ascii_uppercase as alc
 from copy import copy
+from pathlib import Path
 def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS', 'SISTEMAS DE INFORMAÇÃO', 'MEDICINA VETERINÁRIA']):
-    #year = input("What year you want to check? \n")
-    path_enade = f'./CollegeListBRconceito_enade{year}.xlsx'
-    path_idd = f'./CollegeListBRconceito_idd{year}.xlsx'
-    url_link = f'https://download.inep.gov.br/educacao_superior/indicadores/resultados/{year}'
-    url_link_enade = f'{url_link}/conceito_enade_{year}.xlsx'
-    url_link_idd = f'{url_link}/IDD_{year}.xlsx'
-    if year == '2018':
-        url_link_enade = 'https://download.inep.gov.br/educacao_superior/indicadores/legislacao/2019/resultados_conceito_enade_2018.xlsx'
-        url_link_idd = 'https://download.inep.gov.br/educacao_superior/indicadores/legislacao/2019/resultados_IDD_2018.xlsx'
-    elif year == '2019':
-        url_link_enade = f'{url_link}/Conceito_Enade_2019.xlsx'
-        url_link_idd = f'{url_link}/IDD_2019.xlsx'
-    if not os.path.exists(path_enade):
-        conceito_enade = requests.get(url_link_enade, verify=False)
-        open(f"conceito_enade{year}.xlsx", "wb").write(conceito_enade.content)
-    if not os.path.exists(path_idd):
-        conceito_idd = requests.get(url_link_idd, verify=False)
-        open(f"conceito_idd{year}.xlsx", "wb").write(conceito_idd.content)
-    
-    enade_wb = load_workbook(filename=f'conceito_enade{year}.xlsx')
+    my_folder = Path(__file__).parent.resolve()
+    enade_wb = load_workbook(filename=my_folder / f'conceito_enade{year}.xlsx')
     enade_ws2 = enade_wb.active
     dead_style = copy(enade_ws2['A1'].style)
-    idd_wb = load_workbook(filename=f'conceito_idd{year}.xlsx')
+    idd_wb = load_workbook(filename=my_folder / f'conceito_idd{year}.xlsx')
 
     workbook = enade_wb
-    filename = 'novo_conceito_enade.xlsx'
+    filename = my_folder / 'novo_conceito_enade.xlsx'
     if type == 'idd':
-        filename = 'novo_conceito_idd.xlsx'
+        filename =my_folder / 'novo_conceito_idd.xlsx'
         workbook =  idd_wb
     enade_ws = workbook.active
     enade_array = []

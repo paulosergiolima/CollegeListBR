@@ -68,5 +68,3 @@ def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNO
         new_enade_ws.append(cool_array)
     new_enade.save(filename=filename)
     return filename
-create()
-create(type='idd')

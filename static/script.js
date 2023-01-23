@@ -1,5 +1,5 @@
 function myfunction() {
-    year = document.getElementById('year').value
+    year = document.querySelector('input[name="year"]:checked').value
     
 
     var checkboxes = document.getElementsByName('check')
@@ -14,24 +14,25 @@ function myfunction() {
 }
 
 function getCourses() {
+ document.querySelector('input[name="year"]:checked').value;
     var checkboxes = document.getElementsByName('check')
     for (var checks of checkboxes) {
         checks.checked = false
     }
 
-    if (document.getElementById('year').value == "2019") {
+    if (document.querySelector('input[name="year"]:checked').value == "2019") {
         document.getElementById('courses_2019').removeAttribute('hidden')
     }else {
         document.getElementById('courses_2019').setAttribute('hidden', 'hidden')
     }
 
-    if (document.getElementById('year').value == "2021") {
+    if (document.querySelector('input[name="year"]:checked').value == "2021") {
         document.getElementById('courses_2021').removeAttribute('hidden')
     }else {
         document.getElementById('courses_2021').setAttribute('hidden', 'hidden')
     }
     
-    if (document.getElementById('year').value == "2018") {
+    if (document.querySelector('input[name="year"]:checked').value == "2018") {
         document.getElementById('courses_2018').removeAttribute('hidden')
     }else {
         document.getElementById('courses_2018').setAttribute('hidden', 'hidden')

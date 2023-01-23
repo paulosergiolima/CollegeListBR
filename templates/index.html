@@ -5,25 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CollegeListBr</title>
     <script src="/static/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
 <body>
     <label for="fname">Ano:</label>
-    <input type="text" id="year" name="fname" oninput="getCourses()"><br><br>
-    <div hidden id="courses_2021" >
+    <!-- <input type="text" id="year" name="fname" oninput="getCourses()"><br><br> -->
+    <div id="radio_buttons">
+        <input type="radio" id="radio_2021" name="year" value="2021" onchange="getCourses()">2021
+        <input type="radio" id="radio_2019" name="year" value="2019" onchange="getCourses()">2019
+        <input type="radio" id="radio_2018" name="year" value="2018" onchange="getCourses()">2018
+    </div>
+    <div hidden id="courses_2021">
         {% for course in cursos2021: %}
         <input type="checkbox" id="{{ course }}" name="check"> {{ course }} <br>
         {% endfor %}
     </div>
-    <div hidden id="courses_2019" >
+    <div hidden id="courses_2019">
         {% for course in cursos2019: %}
         <input type="checkbox" id="{{ course }}" name="check"> {{ course }} <br>
         {% endfor %}
     </div>
-    <div hidden id="courses_2018" >
+    <div hidden id="courses_2018">
         {% for course in cursos2018: %}
         <input type="checkbox" id="{{ course }}" name="check"> {{ course }} <br>
         {% endfor %}

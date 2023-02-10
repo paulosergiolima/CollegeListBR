@@ -1,12 +1,10 @@
-import os
 from openpyxl import load_workbook, Workbook
-import requests
 from string import ascii_uppercase as alc
 from copy import copy
 from pathlib import Path
 def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS', 'SISTEMAS DE INFORMAÇÃO', 'MEDICINA VETERINÁRIA']):
     my_folder = Path(__file__).parent.resolve()
-    enade_wb = load_workbook(filename=my_folder / f'conceito_enade{year}.xlsx')
+    enade_wb = load_workbook(filename=my_folder / f'Merged file2.xlsx')
     enade_ws2 = enade_wb.active
     dead_style = copy(enade_ws2['A1'].style)
     idd_wb = load_workbook(filename=my_folder / f'conceito_idd{year}.xlsx')

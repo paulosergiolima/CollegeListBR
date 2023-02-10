@@ -1,6 +1,4 @@
-function myfunction() {
-    year = document.querySelector('input[name="year"]:checked').value
-    
+function myfunction() {    
 
     var checkboxes = document.getElementsByName('check')
     var courses_string = ''
@@ -10,6 +8,6 @@ function myfunction() {
         }
     }
     console.log(courses_string)
-    window.open(`${location.origin}/${year}/enade/${courses_string}`)
+    window.open(`${location.origin}/2021/enade/${courses_string}`)
 }
 

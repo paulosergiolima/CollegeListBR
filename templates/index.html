@@ -5,18 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CollegeListBr</title>
+    <title>Brazillian College Filter</title>
     <script src="/static/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
 <body>
+    <h3>Filter by courses:</h3>
     <div id="courses_2018">
         {% for course in cursos2018: %}
         <input type="checkbox" id="{{ course }}" name="check"> {{ course }} <br>
         {% endfor %}
     </div>
     <input type="button" value="Submit" onclick="myfunction()">
+    <h3>Filter by state:</h3>
+    <div id="brazillian_states">
+        
+    </div>
 </body>
 
 </html>

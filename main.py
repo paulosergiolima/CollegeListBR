@@ -11,14 +11,16 @@ courses_19 = ['MEDICINA VETERINÁRIA', 'ODONTOLOGIA', 'MEDICINA', 'AGRONOMIA', '
 
 courses_18 = ['DIREITO', 'CIÊNCIAS ECONÔMICAS', 'SERVIÇO SOCIAL', 'CIÊNCIAS CONTÁBEIS', 'ADMINISTRAÇÃO', 'RELAÇÕES INTERNACIONAIS', 'COMUNICAÇÃO SOCIAL - JORNALISMO', 'PSICOLOGIA', 'SECRETARIADO EXECUTIVO', 'TURISMO', 'TEOLOGIA', 'DESIGN', 'COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA', 'ADMINISTRAÇÃO PÚBLICA', 'TECNOLOGIA EM GASTRONOMIA', 'TECNOLOGIA EM DESIGN DE MODA', 'TECNOLOGIA EM GESTÃO DE RECURSOS HUMANOS', 'TECNOLOGIA EM MARKETING', 'TECNOLOGIA EM GESTÃO FINANCEIRA', 'TECNOLOGIA EM DESIGN DE INTERIORES', 'TECNOLOGIA EM PROCESSOS GERENCIAIS', 'TECNOLOGIA EM GESTÃO DA QUALIDADE', 'TECNOLOGIA EM DESIGN GRÁFICO', 'TECNOLOGIA EM LOGÍSTICA', 'TECNOLOGIA EM GESTÃO COMERCIAL', 'TECNOLOGIA EM COMÉRCIO EXTERIOR', 'TECNOLOGIA EM GESTÃO PÚBLICA'] + courses_19 + courses_21
 
-@app.route('/<path:year>/<path:type>/<path:raw_courses>', methods=['POST', 'GET'])
-def login(year, type, raw_courses):
+states = ['MT', 'DF', 'SE', 'AM', 'PI', 'MG', 'PR', 'PE', 'RS', 'RJ', 'SP', 'BA', 'CE', 'SC', 'GO', 'RN', 'ES', 'PB', 'PA', 'MS', 'RO', 'TO', 'AL', 'MA', 'AC', 'RR', 'AP']
+
+adm_category = ['Pública Federal', 'Pública Estadual', 'Privada sem fins lucrativos', 'Pública Municipal', 'Privada com fins lucrativos', 'Especial']
+
+@app.route('/<path:year>/<path:ws_type>/<path:raw_courses>/<path:UFs>/<path:adm_category>', methods=['POST', 'GET'])
+def save_file(year, ws_type, raw_courses, UFs, adm_category):
     raw_courses = raw_courses.replace('_', ' ')
     courses = raw_courses.split(';')
-    print(courses)
-    print(raw_courses)
-    file = create(type=type, year=year, courses=courses)
+    file = create(ws_type=ws_type, year=year, courses=courses, UFs=UFs, adm_category=adm_category)
     return send_file(file)
 @app.route('/')
 def index():
-    return render_template('index.html', cursos2021 = courses_21, cursos2019 = courses_19, cursos2018 = courses_18)
+    return render_template('index.html', cursos2018 = courses_18, states = states, adm_category = adm_category)

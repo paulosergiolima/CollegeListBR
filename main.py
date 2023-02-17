@@ -15,11 +15,11 @@ states = ['MT', 'DF', 'SE', 'AM', 'PI', 'MG', 'PR', 'PE', 'RS', 'RJ', 'SP', 'BA'
 
 adm_category = ['Pública Federal', 'Pública Estadual', 'Privada sem fins lucrativos', 'Pública Municipal', 'Privada com fins lucrativos', 'Especial']
 
-@app.route('/<path:year>/<path:ws_type>/<path:raw_courses>/<path:UFs>', methods=['POST', 'GET'])
-def save_file(year, ws_type, raw_courses, UFs):
+@app.route('/<path:year>/<path:ws_type>/<path:raw_courses>/<path:UFs>/<path:adm_category>', methods=['POST', 'GET'])
+def save_file(year, ws_type, raw_courses, UFs, adm_category):
     raw_courses = raw_courses.replace('_', ' ')
     courses = raw_courses.split(';')
-    file = create(ws_type=ws_type, year=year, courses=courses, UFs=UFs)
+    file = create(ws_type=ws_type, year=year, courses=courses, UFs=UFs, adm_category=adm_category)
     return send_file(file)
 @app.route('/')
 def index():

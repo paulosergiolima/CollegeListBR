@@ -5,22 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brazillian College Filter</title>
+    <title>Filtrar lista de faculdades</title>
     <script src="/static/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <h3>Filter by courses:</h3>
+    <h3>Filtrar pelos cursos:</h3>
     <div id="courses_2018">
         {% for course in cursos2018: %}
         <input type="checkbox" id="{{ course }}" name="check"> {{ course }} <br>
         {% endfor %}
     </div>
-    <h3>Filter by UF:</h3>
+    <h3>Filtrar pelo UF:</h3>
     <div id="brazillian_states">
         {% for state in states: %}
         <input type="checkbox" id="{{ state }}" name="check_states"> {{ state }} <br>
+        {% endfor %}
+    </div>
+    <h3>Filtrar pela categoria administrativa</h3>
+    <div id="adm_categories">
+        {% for adm in adm_category: %}
+        <input type="checkbox" id="{{ adm }}" name="categories"> {{ adm }} <br>
         {% endfor %}
     </div>
     <input type="button" value="Filtrar" onclick="myfunction()">

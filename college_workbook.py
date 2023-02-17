@@ -2,7 +2,7 @@ from openpyxl import load_workbook, Workbook
 from string import ascii_uppercase as alc
 from copy import copy
 from pathlib import Path
-def create(ws_type='enade',year='2021', courses=[], UFs = [], adm = []):
+def create(ws_type='enade',year='2021', courses=[], UFs = [], adm_category = []):
 
     my_folder = Path(__file__).parent.resolve()
     enade_wb = load_workbook(filename=my_folder / f'Merged file2.xlsx')
@@ -39,7 +39,7 @@ def create(ws_type='enade',year='2021', courses=[], UFs = [], adm = []):
         new_enade_ws[f'{i}1'].alignment = copy(enade_ws[f'{i}1'].alignment)
     for cell_row in enade_ws.rows:
         try:
-            print(cell_row[12].row)
+            adm_category.index(cell_row[7].value.strip())
             UFs.index(cell_row[12].value.strip())
             courses.index(cell_row[2].value.strip())
             print(cell_row[12].value, cell_row[2].value)

@@ -2,7 +2,8 @@ from openpyxl import load_workbook, Workbook
 from string import ascii_uppercase as alc
 from copy import copy
 from pathlib import Path
-def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS', 'SISTEMAS DE INFORMAÇÃO', 'MEDICINA VETERINÁRIA']):
+def create(ws_type='enade',year='2021', courses=[], UFs = [], adm = []):
+
     my_folder = Path(__file__).parent.resolve()
     enade_wb = load_workbook(filename=my_folder / f'Merged file2.xlsx')
     enade_ws2 = enade_wb.active
@@ -11,7 +12,7 @@ def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNO
 
     workbook = enade_wb
     filename = my_folder / 'novo_conceito_enade.xlsx'
-    if type == 'idd':
+    if ws_type == 'idd':
         filename =my_folder / 'novo_conceito_idd.xlsx'
         workbook =  idd_wb
     enade_ws = workbook.active
@@ -36,16 +37,20 @@ def create(type='enade',year='2021', courses=['CIÊNCIA DA COMPUTAÇÃO', 'TECNO
             new_enade_ws[f'{i}1'].style = copy(dead_style)
         new_enade_ws[f'{i}1'].border = copy(enade_ws[f'{i}1'].border)
         new_enade_ws[f'{i}1'].alignment = copy(enade_ws[f'{i}1'].alignment)
-    for data in enade_ws['C']:
+    for cell_row in enade_ws.rows:
         try:
-            courses.index(data.value.strip())
-            enade_array.append(data.row)
+            print(cell_row[12].row)
+            UFs.index(cell_row[12].value.strip())
+            courses.index(cell_row[2].value.strip())
+            print(cell_row[12].value, cell_row[2].value)
+            enade_array.append(cell_row[0].row)
         except:
             pass
     for data in enade_array:
+        print(data)
         cool_array = []
-        for i in alc:
-            cool_array.append(enade_ws[f'{i}{data}'].value)
+        for chara in alc:
+            cool_array.append(enade_ws[f'{chara}{data}'].value)
         new_enade_ws.append(cool_array)
     new_enade.save(filename=filename)
     return filename

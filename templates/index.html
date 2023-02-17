@@ -17,11 +17,14 @@
         <input type="checkbox" id="{{ course }}" name="check"> {{ course }} <br>
         {% endfor %}
     </div>
-    <input type="button" value="Submit" onclick="myfunction()">
-    <h3>Filter by state:</h3>
+    <h3>Filter by UF:</h3>
     <div id="brazillian_states">
-        
+        {% for state in states: %}
+        <input type="checkbox" id="{{ state }}" name="check_states"> {{ state }} <br>
+        {% endfor %}
     </div>
+    <input type="button" value="Filtrar" onclick="myfunction()">
+    
 </body>
 
 </html>
